@@ -1,0 +1,46 @@
+﻿@model Entities.SaleProduct
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SaleProduct</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data"method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsEnable" /> @Html.DisplayNameFor(model => model.IsEnable)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Deadline" class="control-label"></label>
+                <input asp-for="Deadline" class="form-control"  
+                value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")"
+                min="@DateTime.Now.ToString("yyyy-MM-dd")"
+                /> 
+                <span asp-validation-for="Deadline" class="text-danger"></span>
+            </div>
+           <select name="ProductID" class="form-control">
+                @foreach(var product in ViewBag.Products as List<Product>)
+                {
+                    <option value="@product.Id">@product.Name</option>
+                }
+           </select>
+
+           
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
