@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Entities;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Areas.Admin.Controllers
 {
     [Area(nameof(Admin))]
+    [Authorize(Roles ="Admin")]
     public class ProductController : Controller
     {
         private readonly ProductManager _productManager;

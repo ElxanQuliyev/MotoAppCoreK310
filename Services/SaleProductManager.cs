@@ -20,7 +20,7 @@ namespace Services
         public List<SaleProduct> GetAll()
         {
 
-            return _context.SaleProducts.Include(c=>c.Product).ToList();
+            return _context.SaleProducts.Where(c=>c.Deadline>=DateTime.Now).Include(c=>c.Product).ToList();
         }
 
         public SaleProduct? GetById(int? id)

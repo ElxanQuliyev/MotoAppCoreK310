@@ -30,7 +30,8 @@ namespace Web.Controllers
                 Categories = _categoryManager.GetAll(),
                 Products=_productManager.GetAll(),
                 Sales=_saleProductManager.GetAll(),
-                Sliders=_sliderManager.GetAll()
+                Sliders=_sliderManager.GetAll(),
+                FeaturedProducts=_productManager.GetFetauredAll()
             };
             return View(vm);
         }

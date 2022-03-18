@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -6,6 +7,8 @@ using Services;
 namespace Web.Areas.Admin.Controllers
 {
     [Area(nameof(Admin))]
+    [Authorize(Roles = "Admin,Moderator")]
+
     public class CategoryController : Controller
     {
         private readonly CategoryManager _categoryManager;
@@ -30,6 +33,7 @@ namespace Web.Areas.Admin.Controllers
             return View(category);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: CategoryController/Create
         public ActionResult Create()
         {
@@ -39,6 +43,7 @@ namespace Web.Areas.Admin.Controllers
         // POST: CategoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(Category category,IFormFile PhotoUrl)
         {
             if (PhotoUrl != null)
@@ -60,6 +65,8 @@ namespace Web.Areas.Admin.Controllers
         }
 
         // GET: CategoryController/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Edit(int id)
         {
             var Category  = _categoryManager.GetById(id);
@@ -86,6 +93,7 @@ namespace Web.Areas.Admin.Controllers
         }
 
         // GET: CategoryController/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -98,6 +106,7 @@ namespace Web.Areas.Admin.Controllers
         // POST: CategoryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
 

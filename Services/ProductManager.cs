@@ -20,13 +20,21 @@ namespace Services
         public List<Product> GetAll()
         {
             return _context.Products
-                .Include(c=>c.Category).ToList();
+                .OrderByDescending(c=>c.Id).ToList();
+        }
+        public List<Product> GetFetauredAll()
+        {
+            return _context.Products
+                .Where(c=>c.IsFeature)
+                .OrderByDescending(c => c.Id).Take(15).ToList();
         }
 
         public List<Product> SaleProductAll()
         {
                 return _context.Products
                    .Where(c => c.SaleProducts.All(d=>d.ProductID!=c.Id || d.Deadline<=DateTime.Now))
+                   .OrderByDescending(c => c.Id)
+                   .Take(15)
                    .ToList();
         }
 

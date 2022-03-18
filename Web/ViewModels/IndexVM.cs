@@ -8,5 +8,7 @@ namespace Web.ViewModels
         public List<Category> Categories { get; set; }  
         public List<SaleProduct> Sales { get; set; }
         public  List<Product> Products { get; set; }
+        public List<Product> FeaturedProducts { get; set; }
+
     }
 }
